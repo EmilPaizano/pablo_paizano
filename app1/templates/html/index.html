@@ -1,0 +1,59 @@
+{%extends "base.html"%}
+
+{% block title %}Calcular Cuota{% endblock %}
+
+{% block container %}
+<h1>Calcular Cuota</h1>
+<div class="row">
+    <div class="col-4">
+ 
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="monto">Monto</label>
+                <input type="number" name="monto" id="monto" class="form-control "required autofocus>
+            </div>
+            <div class="mb-3">
+                <label for="tasa">Tasa</label>
+                <input type="number" name="tasa" id="tasa" class="form-control "required>
+            </div>
+            <div class="mb-3">
+                <label for="plazo">Plazo(años)</label>
+                <input type="number" name="plazo" id="plazo" class="form-control "required>
+            </div>
+            <div>
+                <input type="submit" class="btn btn-lg btn-outline-dark" value="Calcular">
+            </div>
+        </form>
+    
+    </div>
+    <div class="col-8">
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr>
+                    <th>Monto</th>
+                    <th>Tasa</th>
+                    <th>Plazo(meses)</th>
+                    <th>Cuota</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for c in datos %}
+                    <tr>
+                        <td>L.{{c.monto}}</td>
+                        <td>{{c.tasa}}%</td>
+                        <td>{{c.plazo}}</td>
+                        <td>L.{{c.cuota}}</td>
+                        <td>L.{{c.total}}</td>
+                    </tr>
+                {% endfor %}
+                    
+                
+            </tbody>
+        </table>
+
+    </div>
+</div>
+{%endblock%}
